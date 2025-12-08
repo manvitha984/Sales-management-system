@@ -10,6 +10,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 const parseCSV = (filePath) => {
   return new Promise((resolve, reject) => {
     try {
@@ -228,6 +229,7 @@ const seedDatabase = async () => {
         const result = await Sales.insertMany(batch, { ordered: false });
         insertedCount += result.length;
         const progress = Math.round((insertedCount / salesData.length) * 100);
+        // Only log every 10k records
         if (insertedCount % 10000 === 0 || insertedCount === salesData.length) {
           console.log(`   ✅ Progress: ${insertedCount.toLocaleString()}/${salesData.length.toLocaleString()} (${progress}%)`);
         }
