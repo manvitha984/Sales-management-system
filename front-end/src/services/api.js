@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../utils/constants'; 
+import { API_BASE_URL } from '../utils/constants'; // Correct
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
@@ -28,6 +28,7 @@ apiClient.interceptors.response.use(
   }
 );
 
+
 export const fetchSalesData = async (params) => {
   try {
     const response = await apiClient.get('/sales', { params });
@@ -37,6 +38,7 @@ export const fetchSalesData = async (params) => {
   }
 };
 
+
 export const fetchFilterOptions = async () => {
   try {
     const response = await apiClient.get('/sales/filter-options');
@@ -45,6 +47,7 @@ export const fetchFilterOptions = async () => {
     throw error;
   }
 };
+
 
 export const exportSalesData = async (params) => {
   try {

@@ -68,7 +68,6 @@ export const buildQueryString = (params) => {
   return searchParams.toString();
 };
 
-
 export const downloadFile = (blob, filename) => {
   const url = window.URL.createObjectURL(blob);
   const link = document.createElement('a');

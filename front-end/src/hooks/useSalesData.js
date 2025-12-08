@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+
 export const useSalesData = (params) => {
   const [salesData, setSalesData] = useState([]);
   const [statistics, setStatistics] = useState(null);
@@ -25,9 +26,12 @@ export const useSalesData = (params) => {
     try {
       setLoading(true);
       setError(null);
+
       const queryParams = new URLSearchParams();
+
       queryParams.append('page', params.page || 1);
       queryParams.append('limit', params.limit || 10);
+
       if (params.search && params.search.trim()) {
         queryParams.append('search', params.search.trim());
       }
@@ -43,9 +47,11 @@ export const useSalesData = (params) => {
         if (params.filters.region && params.filters.region.length > 0) {
           queryParams.append('region', params.filters.region.join(','));
         }
+
         if (params.filters.gender && params.filters.gender.length > 0) {
           queryParams.append('gender', params.filters.gender.join(','));
         }
+
         if (params.filters.ageRange) {
           if (params.filters.ageRange.min) {
             queryParams.append('ageMin', params.filters.ageRange.min);
@@ -54,15 +60,19 @@ export const useSalesData = (params) => {
             queryParams.append('ageMax', params.filters.ageRange.max);
           }
         }
+
         if (params.filters.category && params.filters.category.length > 0) {
           queryParams.append('category', params.filters.category.join(','));
         }
+
         if (params.filters.tags && params.filters.tags.length > 0) {
           queryParams.append('tags', params.filters.tags.join(','));
         }
+
         if (params.filters.paymentMethod && params.filters.paymentMethod.length > 0) {
           queryParams.append('paymentMethod', params.filters.paymentMethod.join(','));
         }
+
         if (params.filters.dateRange) {
           if (params.filters.dateRange.start) {
             queryParams.append('startDate', params.filters.dateRange.start);
@@ -72,6 +82,7 @@ export const useSalesData = (params) => {
           }
         }
       }
+
       const url = `${API_BASE_URL}/sales?${queryParams.toString()}`;
       console.log('Fetching from:', url);
 
